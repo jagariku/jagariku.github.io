@@ -1,23 +1,40 @@
 ---
 import "../../style/style.css";
-import json from "../../../public/json/hero.json";
+import hero from "../../../public/json/hero.json";
+import heroDetail from "../../../public/json/hero-detail.json";
+import seasonData from "../../../public/json/2024-03.json";
 
 interface Card {
   slug: string;
   name: string;
   text: string;
+  id: number;
+  image: string;
+  armor: number;
+  artistName: string;
+  recoRace: string;
 }
 export async function getStaticPaths() {
-  console.log(json);
-  return json.cards.map(({ slug, name, text }: Card) => {
-    return {
-      params: { slug },
-      props: { name, text },
-    };
-  });
+  return hero.cards.map(
+    ({ slug, name, text, id, image, armor, artistName }) => {
+      const detailData = heroDetail.cards.filter(
+        (detailCard) => detailCard.parentId === id
+      );
+      const season = seasonData.filter(
+        (seasonCard) => seasonCard.name === name
+      );
+
+      text = detailData.length ? detailData[0].text : "準備中";
+      let recoRace = season.length ? season[0].recoRace.join(",") : "準備中";
+      return {
+        params: { slug },
+        props: { name, text, image, armor, artistName, recoRace },
+      };
+    }
+  );
 }
 const { slug } = Astro.params;
-const { name, text } = Astro.props;
+const { name, text, image, armor, artistName, recoRace } = Astro.props;
 ---
 
 <html>
@@ -50,7 +67,11 @@ const { name, text } = Astro.props;
 
     <h1>{name}</h1>
     <article>
-      <p>{text}</p>
+      <img src={image} alt="" />
+      <div set:html={text} />
+      <p>アーマー:{armor}</p>
+      <p>作者：{artistName}</p>
+      <p>適正：{recoRace}</p>
     </article>
     <p>
       {slug}
