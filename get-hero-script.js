@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://batogura.com/hero.json')
+    fetch('https://batogura.com/hero-detail.json')
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('cards-container');
@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 cardElement.innerHTML = `
                     <h3>${card.name}</h3>
                     <img src="${card.image}" alt="${card.name}" style="width:200px;">
-                    <p>アーティスト: ${card.artistName}</p>
+                    <p>効果: ${card.text}</p>
                     <p>ヘルス: ${card.health}</p>
                     <p>マナコスト: ${card.manaCost}</p>
                     <p>アーマー: ${card.armor}</p>
+                    <p>アーティスト: ${card.artistName}</p>
                 `;
                 container.appendChild(cardElement);
             });
