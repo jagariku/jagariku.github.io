@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('https://batogura.com/hero-detail.json')
         .then(response => response.json())
         .then(data => {
+            const filteredCards = data.cards.filter(card => card.classId === 12);
             const container = document.getElementById('cards-container');
 
             data.cards.forEach(card => {
