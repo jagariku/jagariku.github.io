@@ -1,0 +1,59 @@
+---
+import "../../style/style.css";
+import json from "../../../public/json/hero.json";
+
+interface Card {
+  slug: string;
+  name: string;
+  text: string;
+}
+export async function getStaticPaths() {
+  console.log(json);
+  return json.cards.map(({ slug, name, text }: Card) => {
+    return {
+      params: { slug },
+      props: { name, text },
+    };
+  });
+}
+const { slug } = Astro.params;
+const { name, text } = Astro.props;
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.svg" />
+    <title>{name}</title>
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2Q5FCZYQXF"
+  ></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-2Q5FCZYQXF");
+  </script>
+  <body>
+    <header>
+      <h1>バトルグラウンド攻略サイト</h1>
+      <nav>
+        <ul>
+          <li><a href="../../">各種ヒーロー解説</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <h1>{name}</h1>
+    <article>
+      <p>{text}</p>
+    </article>
+    <p>
+      {slug}
+    </p>
+  </body>
+</html>

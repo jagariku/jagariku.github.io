@@ -1,18 +1,16 @@
 ---
-import '../style/style.css'
-
+import "../style/style.css";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.svg" />
     <title>バトルグラウンド攻略サイト</title>
   </head>
   <!-- Google tag (gtag.js) -->
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-2Q5FCZYQXF"
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2Q5FCZYQXF"
   ></script>
   <script type="text/partytown">
     window.dataLayer = window.dataLayer || [];
@@ -56,24 +54,37 @@ import '../style/style.css'
   </body>
 </html>
 
-<script >
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("json/hero.json")
-    .then((response) => response.json())
-    .then((data: { cards: Array<{ battlegrounds: { hero: boolean }; id: number; slug: string; name: string; image: string; armor: number }> }) => {
-      const heros = data.cards.filter((card) => card.battlegrounds.hero);
-      fetch("json/hero-detail.json")
-        .then((response) => response.json())
-        .then((detail: { cards: Array<{ parentId: number; text: string }> }) => {
-          const container = document.getElementById("cards-container");
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("json/hero.json")
+      .then((response) => response.json())
+      .then(
+        (data: {
+          cards: Array<{
+            battlegrounds: { hero: boolean };
+            id: number;
+            slug: string;
+            name: string;
+            image: string;
+            armor: number;
+          }>;
+        }) => {
+          const heros = data.cards.filter((card) => card.battlegrounds.hero);
+          fetch("json/hero-detail.json")
+            .then((response) => response.json())
+            .then(
+              (detail: {
+                cards: Array<{ parentId: number; text: string }>;
+              }) => {
+                const container = document.getElementById("cards-container");
 
-          heros.forEach((card) => {
-            const cardElement = document.createElement("div");
+                heros.forEach((card) => {
+                  const cardElement = document.createElement("div");
 
-            const detailData = detail.cards.filter(
-              (detailCard) => detailCard.parentId === card.id
-            );
-            cardElement.innerHTML = `
+                  const detailData = detail.cards.filter(
+                    (detailCard) => detailCard.parentId === card.id
+                  );
+                  cardElement.innerHTML = `
                 <div class="hero-item">
                     <a href="hero/${card.slug}">
                         <div>
@@ -94,39 +105,48 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
                 </div>
                 `;
-            cardElement.classList.add("hero");
-            container?.appendChild(cardElement);
-          });
-        })
-        .catch((error: Error) => {
-          console.error("データの取得に失敗しました:", error);
-        });
-    })
-    .catch((error: Error) => {
-      console.error("データの取得に失敗しました:", error);
-    });
-});
+                  cardElement.classList.add("hero");
+                  container?.appendChild(cardElement);
+                });
+              }
+            )
+            .catch((error: Error) => {
+              console.error("データの取得に失敗しました:", error);
+            });
+        }
+      )
+      .catch((error: Error) => {
+        console.error("データの取得に失敗しました:", error);
+      });
+  });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const isDisplayHeroImg = document.getElementById("is-display-hero-img") as HTMLInputElement;
-  const isDisplayHeroPower = document.getElementById("is-display-hero-power") as HTMLInputElement;
+  document.addEventListener("DOMContentLoaded", function () {
+    const isDisplayHeroImg = document.getElementById(
+      "is-display-hero-img"
+    ) as HTMLInputElement;
+    const isDisplayHeroPower = document.getElementById(
+      "is-display-hero-power"
+    ) as HTMLInputElement;
 
-  function toggleImg() {
-    const images = document.querySelectorAll("#cards-container img") as NodeListOf<HTMLElement>;
-images.forEach(function (img) {
-  img.style.display = isDisplayHeroImg.checked ? "block" : "none";
-});
-  }
+    function toggleImg() {
+      const images = document.querySelectorAll(
+        "#cards-container img"
+      ) as NodeListOf<HTMLElement>;
+      images.forEach(function (img) {
+        img.style.display = isDisplayHeroImg.checked ? "block" : "none";
+      });
+    }
 
-  function togglePower() {
-    const heroPowers = document.querySelectorAll("#cards-container .hero-power") as NodeListOf<HTMLElement>;
-heroPowers.forEach(function (heroPower) {
-  heroPower.style.display = isDisplayHeroPower.checked ? "block" : "none";
-});
-  }
+    function togglePower() {
+      const heroPowers = document.querySelectorAll(
+        "#cards-container .hero-power"
+      ) as NodeListOf<HTMLElement>;
+      heroPowers.forEach(function (heroPower) {
+        heroPower.style.display = isDisplayHeroPower.checked ? "block" : "none";
+      });
+    }
 
-  isDisplayHeroImg.addEventListener("change", toggleImg);
-  isDisplayHeroPower.addEventListener("change", togglePower);
-});
-
-  </script>
+    isDisplayHeroImg.addEventListener("change", toggleImg);
+    isDisplayHeroPower.addEventListener("change", togglePower);
+  });
+</script>
