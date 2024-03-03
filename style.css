@@ -1,0 +1,78 @@
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+section {
+  padding: 20px;
+  margin: 20px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+h3 {
+  font-size: medium;
+  margin: 4px;
+}
+
+p.hero-power {
+  font-size: x-small;
+}
+
+.hero-power {
+  display: none;
+}
+
+#cards-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+#cards-container a {
+  text-decoration: none;
+  color: #333;
+}
+.hero-item img {
+  margin: auto;
+}
+.hero {
+  border-style: solid;
+}
+.hero-item {
+  text-align: center;
+}
+</style>

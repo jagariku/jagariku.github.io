@@ -1,104 +1,55 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>バトルグラウンド攻略サイト</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2Q5FCZYQXF"></script>
-<script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-2Q5FCZYQXF"
+  ></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-    gtag('config', 'G-2Q5FCZYQXF');
-</script>
+    gtag("config", "G-2Q5FCZYQXF");
+  </script>
+  <script src="script.js"></script>
 
-<body>
+  <body>
     <header>
-        <h1>バトルグラウンド攻略サイト</h1>
-        <nav>
-            <ul>
-                <li><a href="#tips">攻略のヒント</a></li>
-                <li><a href="#maps">マップ情報</a></li>
-                <li><a href="#weapons">武器ガイド</a></li>
-            </ul>
-        </nav>
+      <h1>バトルグラウンド攻略サイト</h1>
+      <nav>
+        <ul>
+          <li><a href="#hero">各種ヒーロー解説</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <section id="tips">
-            <h2>各種ヒーロー解説</h2>
-            <div id="cards-container"></div>
-            <script src="get-hero-script.js"></script>
-            <!-- 攻略のヒントのコンテンツ -->
-        </section>
-
-        <section id="maps">
-            <h2>マップ情報</h2>
-            <!-- マップのコンテンツ -->
-        </section>
-
-        <section id="weapons">
-            <h2>武器ガイド</h2>
-            <!-- 武器のコンテンツ -->
-        </section>
+      <section id="hero">
+        <h2>各種ヒーロー解説</h2>
+        <label>
+          画像表示
+          <input type="checkbox" id="is-display-hero-img" checked />
+        </label>
+        <label>
+          効果表示
+          <input type="checkbox" id="is-display-hero-power" />
+        </label>
+        <div id="cards-container"></div>
+        <script src="get-hero-script.js"></script>
+        <!-- 攻略のヒントのコンテンツ -->
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 バトルグラウンド攻略サイト</p>
+      <p>&copy; 2024 バトルグラウンド攻略サイト</p>
     </footer>
-</body>
-
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-
-    header {
-        background-color: #333;
-        color: #fff;
-        padding: 1rem 0;
-        text-align: center;
-    }
-
-    header h1 {
-        margin: 0;
-    }
-
-    nav ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    nav ul li {
-        display: inline;
-        margin-right: 20px;
-    }
-
-    nav ul li a {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    section {
-        padding: 20px;
-        margin: 20px 0;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        background-color: #333;
-        color: #fff;
-    }
-</style>
-
+  </body>
 </html>
