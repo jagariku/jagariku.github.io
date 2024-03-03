@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const filteredCards = data.cards.filter(card => card.classId === 12);
             const container = document.getElementById('cards-container');
 
-            data.cards.forEach(card => {
+            filteredCards.forEach(card => {
                 const cardElement = document.createElement('div');
                 cardElement.innerHTML = `
                     <h3>${card.name}</h3>
