@@ -1,0 +1,75 @@
+---
+import "../../style/style.css";
+import minion from "../../../public/json/minion.json";
+
+interface Card {
+  slug: string;
+  name: string;
+  text: string;
+  id: number;
+  image: string;
+  artistName: string;
+}
+export async function getStaticPaths() {
+  return minion.cards.map(({ slug, name, text, id, image, artistName }) => {
+    return {
+      params: { slug },
+      props: { name, text, image, artistName },
+    };
+  });
+}
+const { slug } = Astro.params;
+const { name, text, image, artistName } = Astro.props;
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.svg" />
+    <title>{name}</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3676689120783487"
+      crossorigin="anonymous"></script>
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2Q5FCZYQXF"
+  ></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-2Q5FCZYQXF");
+  </script>
+  <body>
+    <header>
+      <h1>バトルグラウンド攻略サイト</h1>
+      <nav>
+        <ul>
+          <li><a href="../..#here">各種ヒーロー解説</a></li>
+          <li><a href="../..#minion">各種ミニオン解説</a></li>
+          <li><a href="../../privacy-policy">このサイトについて</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>{name}</h1>
+        <article>
+          <img src={image} alt="" />
+          <div set:html={text} />
+          <p>作者：{artistName}</p>
+        </article>
+        <p>
+          {slug}
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 バトルグラウンド攻略サイト</p>
+    </footer>
+  </body>
+</html>

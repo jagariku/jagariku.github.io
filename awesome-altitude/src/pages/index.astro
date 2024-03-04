@@ -33,6 +33,7 @@ import "../style/style.css";
       <nav>
         <ul>
           <li><a href="#hero">各種ヒーロー解説</a></li>
+          <li><a href="#minion">各種ミニオン解説</a></li>
           <li><a href="/privacy-policy">このサイトについて</a></li>
         </ul>
       </nav>
@@ -50,7 +51,18 @@ import "../style/style.css";
           <input type="checkbox" id="is-display-hero-power" />
         </label>
         <div id="cards-container"></div>
-        <!-- 攻略のヒントのコンテンツ -->
+      </section>
+      <section id="minion">
+        <h2>各種ミニオン解説</h2>
+        <label>
+          画像表示
+          <input type="checkbox" id="is-display-minion-img" checked />
+        </label>
+        <label>
+          効果表示
+          <input type="checkbox" id="is-display-minion-power" />
+        </label>
+        <div id="minion-cards-container"></div>
       </section>
     </main>
 
@@ -146,6 +158,82 @@ import "../style/style.css";
     function togglePower() {
       const heroPowers = document.querySelectorAll(
         "#cards-container .hero-power"
+      ) as NodeListOf<HTMLElement>;
+      heroPowers.forEach(function (heroPower) {
+        heroPower.style.display = isDisplayHeroPower.checked ? "block" : "none";
+      });
+    }
+
+    isDisplayHeroImg.addEventListener("change", toggleImg);
+    isDisplayHeroPower.addEventListener("change", togglePower);
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("json/minion.json")
+      .then((response) => response.json())
+      .then(
+        (data: {
+          cards: Array<{
+            battlegrounds: { hero: boolean };
+            id: number;
+            slug: string;
+            name: string;
+            image: string;
+            armor: number;
+            text: string;
+          }>;
+        }) => {
+          const minions = data.cards.filter((card) => !card.battlegrounds.hero);
+          const container = document.getElementById("minion-cards-container");
+          minions.forEach((card) => {
+            const cardElement = document.createElement("div");
+            cardElement.innerHTML = `
+                <div class="minion-item">
+                    <a href="minion/${card.slug}">
+                        <div>
+                            <h3>${card.name}</h3>
+                            <img 
+                                src="${card.image}" alt="${card.name}" 
+                                style="width:100px;
+                            ">
+                            <p class="minion-power">
+                                効果: ${card.text}
+                            </p>
+                            <p class="minion-power">アーマー: ${card.armor}</p>
+                        </div>
+                    </a>
+                </div>
+              `;
+            cardElement.classList.add("minion");
+            container?.appendChild(cardElement);
+          });
+        }
+      )
+      .catch((error: Error) => {
+        console.error("データの取得に失敗しました:", error);
+      });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const isDisplayHeroImg = document.getElementById(
+      "is-display-minion-img"
+    ) as HTMLInputElement;
+    const isDisplayHeroPower = document.getElementById(
+      "is-display-minion-power"
+    ) as HTMLInputElement;
+
+    function toggleImg() {
+      const images = document.querySelectorAll(
+        "#minion-cards-container img"
+      ) as NodeListOf<HTMLElement>;
+      images.forEach(function (img) {
+        img.style.display = isDisplayHeroImg.checked ? "block" : "none";
+      });
+    }
+
+    function togglePower() {
+      const heroPowers = document.querySelectorAll(
+        "#minion-cards-container .minion-power"
       ) as NodeListOf<HTMLElement>;
       heroPowers.forEach(function (heroPower) {
         heroPower.style.display = isDisplayHeroPower.checked ? "block" : "none";

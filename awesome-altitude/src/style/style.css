@@ -11,6 +11,9 @@ header {
   color: #fff;
   padding: 1rem 0;
   text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 header h1 {
@@ -32,9 +35,15 @@ nav ul li a {
   text-decoration: none;
 }
 
+main {
+  padding-top: 150px;
+}
+
 section {
   padding: 20px;
   margin: 20px 0;
+  padding-top: 150px;
+  margin-top: -150px;
 }
 
 footer {
@@ -49,11 +58,13 @@ h3 {
   margin: 4px;
 }
 
-p.hero-power {
+p.hero-power,
+p.minion-power {
   font-size: x-small;
 }
 
-.hero-power {
+.hero-power,
+.minion-power {
   display: none;
 }
 
@@ -61,16 +72,25 @@ p.hero-power {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
-#cards-container a {
+
+#minion-cards-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+#cards-container a,
+#minion-cards-container a {
   text-decoration: none;
   color: #333;
 }
-.hero-item img {
+.hero-item img,
+.minion-item img {
   margin: auto;
 }
-.hero {
+.hero,
+.minion {
   border-style: solid;
 }
-.hero-item {
+.hero-item,
+.minion-item {
   text-align: center;
 }

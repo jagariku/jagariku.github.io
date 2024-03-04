@@ -64,22 +64,29 @@ const { name, text, image, armor, artistName, recoRace } = Astro.props;
       <h1>バトルグラウンド攻略サイト</h1>
       <nav>
         <ul>
-          <li><a href="../../">各種ヒーロー解説</a></li>
+          <li><a href="../..#hero">各種ヒーロー解説</a></li>
+          <li><a href="../..#minion">各種ミニオン解説</a></li>
           <li><a href="../../privacy-policy">このサイトについて</a></li>
         </ul>
       </nav>
     </header>
-
-    <h1>{name}</h1>
-    <article>
-      <img src={image} alt="" />
-      <div set:html={text} />
-      <p>アーマー:{armor}</p>
-      <p>作者：{artistName}</p>
-      <p>適正：{recoRace}</p>
-    </article>
-    <p>
-      {slug}
-    </p>
+    <main>
+      <section>
+        <h1>{name}</h1>
+        <article>
+          <img src={image} alt="" />
+          <div set:html={text} />
+          <p>アーマー:{armor}</p>
+          <p>作者：{artistName}</p>
+          <p>適正：{recoRace}</p>
+        </article>
+        <p>
+          {slug}
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 バトルグラウンド攻略サイト</p>
+    </footer>
   </body>
 </html>
