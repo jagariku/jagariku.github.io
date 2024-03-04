@@ -35,6 +35,16 @@ export async function getStaticPaths() {
 }
 const { slug } = Astro.params;
 const { name, text, image, armor, artistName, recoRace } = Astro.props;
+
+const date = new Date();
+const year = date.getFullYear();
+const month = (date.getMonth() + 1).toString().padStart(2, "0"); // 月は0から始まるため+1
+const day = date.getDate().toString().padStart(2, "0");
+const hours = date.getHours().toString().padStart(2, "0");
+const minutes = date.getMinutes().toString().padStart(2, "0");
+const seconds = date.getSeconds().toString().padStart(2, "0");
+
+const jpDate = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
 ---
 
 <html>
@@ -73,6 +83,7 @@ const { name, text, image, armor, artistName, recoRace } = Astro.props;
     </header>
     <main>
       <section>
+        更新日：{jpDate}
         <h1>{name}</h1>
         <article>
           <img src={image} alt="" />
