@@ -101,9 +101,30 @@ p.minion-power {
     padding: 0.3rem 0;
   }
 
+  header h1 {
+    font-size: 1.2em;
+    margin-block-start: 0.2em;
+    margin-block-end: 0.2em;
+  }
+
+  nav ul {
+    margin-block-start: 0.2em;
+    margin-block-end: 0.2em;
+    padding-inline-start: 2px;
+  }
+
   nav ul li {
     display: block;
     margin-right: 0;
+  }
+
+  article > img {
+    width: 50%;
+  }
+
+  section {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   #cards-container,
