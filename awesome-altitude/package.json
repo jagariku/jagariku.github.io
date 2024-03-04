@@ -6,7 +6,6 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build && node copyToDocs.js",
-    "build up": "astro check && astro build && node copyToDocs.js && git add . && git commit -m \"update\" && git push",
     "preview": "astro preview",
     "astro": "astro"
   },
