@@ -9,17 +9,20 @@ interface Card {
   id: number;
   image: string;
   artistName: string;
+  battlegroundsTier: number;
 }
 export async function getStaticPaths() {
-  return minion.cards.map(({ slug, name, text, id, image, artistName }) => {
-    return {
-      params: { slug },
-      props: { name, text, image, artistName },
-    };
-  });
+  return minion.cards.map(
+    ({ slug, name, text, id, image, artistName, battlegrounds }) => {
+      return {
+        params: { slug },
+        props: { name, text, image, artistName, battlegrounds },
+      };
+    }
+  );
 }
 const { slug } = Astro.params;
-const { name, text, image, artistName } = Astro.props;
+const { name, text, image, artistName, battlegrounds } = Astro.props;
 ---
 
 <html>
@@ -60,9 +63,11 @@ const { name, text, image, artistName } = Astro.props;
       <section>
         <h1>{name}</h1>
         <article>
-          <img src={image} alt="" />
-          <div set:html={text} />
-          <p>作者：{artistName}</p>
+          <img src={image} alt={name} />
+          <p>酒場グレード:{battlegrounds.tier}</p>
+          <p>
+            効果：<span set:html={text} />
+          </p>
         </article>
         <p>
           {slug}
