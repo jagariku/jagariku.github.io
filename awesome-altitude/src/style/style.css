@@ -94,3 +94,25 @@ p.minion-power {
 .minion-item {
   text-align: center;
 }
+
+/* モバイルデバイス用のスタイル */
+@media screen and (max-width: 600px) {
+  header {
+    padding: 0.3rem 0;
+  }
+
+  nav ul li {
+    display: block;
+    margin-right: 0;
+  }
+
+  #cards-container,
+  #minion-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-power,
+  .minion-power {
+    display: none;
+  }
+}
