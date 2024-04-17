@@ -1,0 +1,29 @@
+---
+import { fetchMinionData } from "../services/MinionData";
+import type { MinionCard } from "../types";
+
+const minionData: { cards: MinionCard[] } = await fetchMinionData();
+
+const minions = minionData.cards.filter(
+  (card: MinionCard) => !card.battlegrounds.hero
+);
+---
+
+<div id="minion-cards-container">
+  {
+    minions.map((minion) => (
+      <div class="minion">
+        <div class="minion-item">
+          <a href={`minion/${minion.slug}`}>
+            <div>
+              <h3>{minion.name}</h3>
+              <img src={minion.image} alt={minion.name} style="width:100px;" />
+              <p class="minion-power">効果: {minion.text}</p>
+              <p class="minion-power">アーマー: {minion.armor}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    ))
+  }
+</div>

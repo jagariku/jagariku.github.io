@@ -64,6 +64,7 @@ p.minion-power {
 }
 
 .hero-power,
+.hero-armor,
 .minion-power {
   display: none;
 }

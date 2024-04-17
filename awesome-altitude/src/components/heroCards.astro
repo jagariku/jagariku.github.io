@@ -1,0 +1,37 @@
+---
+import "../style/style.css";
+// Import necessary utilities and data-fetching functions
+import { fetchHeroData, fetchHeroDetails } from "../services/HeroData";
+import type { HeroCard, HeroDetail, HeroWithDetail } from "../types";
+
+const heroesData: { cards: HeroCard[] } = await fetchHeroData();
+const heroDetails: { cards: HeroDetail[] } = await fetchHeroDetails();
+
+const heroWithDetails: HeroWithDetail[] = heroesData.cards
+  .filter((card) => card.battlegrounds.hero)
+  .map((hero) => ({
+    ...hero,
+    detail:
+      heroDetails.cards.find((detail) => detail.parentId === hero.id) ||
+      ({ text: "準備中" } as HeroDetail),
+  }));
+---
+
+<div id="cards-container">
+  {
+    heroWithDetails.map((hero: HeroWithDetail) => (
+      <div class="hero">
+        <div class="hero-item">
+          <a href={`hero/${hero.slug}`}>
+            <div>
+              <h3>{hero.name}</h3>
+              <img src={hero.image} alt={hero.name} style="width:100px;" />
+              <p class="hero-power">効果: {hero.detail.text}</p>
+              <p class="hero-armor">アーマー: {hero.armor}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    ))
+  }
+</div>
